@@ -1,2 +1,1 @@
-# mern-app
-This describes a mern application 
+# mern-book-store-app
