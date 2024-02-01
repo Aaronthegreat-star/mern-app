@@ -47,7 +47,7 @@ resource "aws_ecs_service" "mern_service" {
   }
 
   load_balancer {
-    container_name = "mern-backend"
+    container_name = "mern-backend-container"
     container_port = 5000
     target_group_arn = aws_lb_target_group.mern_tg.arn
 
