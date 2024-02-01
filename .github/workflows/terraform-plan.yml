@@ -4,7 +4,7 @@ on:
     pull_request:
   
 env:
-  TF_WORKSPACE: "mern-app"
+  TF_WORKSPACE: "mern-app-1"
   TF_CLOUD_ORGANIZATION: "Aaronhood"
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
 
