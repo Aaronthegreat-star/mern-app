@@ -1,0 +1,18 @@
+name: Semgrep
+
+on: 
+  push: {branches: [main]} 
+  pull_request: {branches: [main]}
+
+jobs:
+   Semgrep-test:
+    runs-on: ubuntu-latest
+    container:
+      image: semgrep/semgrep
+    if: (github.actor != 'dependent[bot]')
+    steps:
+      - uses: actions/checkout@v4
+      - run: semgrep ci
+        env:
+          SEMGREP_APP_TOKEN: ${{secrets.SEMGREP_APP_TOKEN}}
+
