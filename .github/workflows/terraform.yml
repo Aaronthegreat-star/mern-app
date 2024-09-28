@@ -54,15 +54,21 @@ jobs:
          cd ./infrastructure
          terraform apply -auto-approve 
         env:
-          env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-east-1
           TF_VAR_api_token: ${{ secrets.API_TOKEN }}
 
-     -  name: Terraform destroy
+     -  name: Sleep before Destroy
+        run: sleep 120  # Sleeps for 300 seconds (2 minutes)
+
+     -  name: Terraform Destroy
         run: |
-          cd ./infrastructure
-          sleep 120
-          terraform destroy -auto-approve
+         cd ./infrastructure
+         terraform destroy -auto-approve
+        env:
+         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+         AWS_DEFAULT_REGION: us-west-1
+         TF_VAR_api_token: ${{ secrets.API_TOKEN }}
   
