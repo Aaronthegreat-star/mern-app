@@ -50,5 +50,7 @@ jobs:
 
      -  name: Terraform apply
         if: github.event_name == 'push'
-        run: terraform apply -auto-approve 
+        run: |
+         cd ./infrastructure
+         terraform apply -auto-approve 
   
