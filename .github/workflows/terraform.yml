@@ -37,6 +37,8 @@ jobs:
         run: |
          cd ./infrastructure
          terraform plan
+        env:
+          TF_VAR_api_token: ${{ secrets.API_TOKEN }}
 
      -  name: Terraform apply
         if: github.event_name == 'push'
