@@ -59,4 +59,10 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-east-1
           TF_VAR_api_token: ${{ secrets.API_TOKEN }}
+
+     -  name: Terraform destroy
+        run: |
+          cd ./infrastructure
+          sleep 120
+          terraform destroy -auto-approve
   
