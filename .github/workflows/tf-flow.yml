@@ -1,0 +1,40 @@
+name: Terraform workflow
+
+on: 
+ push:
+   branches:
+    - main
+ pull_request:
+    branches:
+    - main
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+     - name: Checkout code
+       uses: actions/checkout@v2
+
+    
+     -  name: setting up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.1.7"
+
+     -  name: Setting up API token
+        run: echo "export TF_VAR_api_token=${{secrets.API_TOKEN}}" >> $GITHUB_ENV
+
+     -  name: Terraform init
+        run: terraform init
+    
+     -  name: Terraform format
+        run: terraform fmt
+
+     -  name: Terraform plan
+        run: terraform plan
+
+     -  name: Terraform apply
+        if: github.event_name == 'push'
+        run: terraform apply -auto-appprove
+  
