@@ -27,13 +27,15 @@ jobs:
       - name: Build and Push Backend Docker Image to ecr
         run: |
           echo "Building the Backend Docker image"
-          docker build -t ${{ secrets.ECR_REGISTRY }}:latest-backend -f ./backend .
+          cd ./backend
+          docker build -t ${{ secrets.ECR_REGISTRY }}:latest-backend -f ./Dockerfile .
           echo "Pushing the Backend Docker image to Amazon ECR"
           docker push ${{ secrets.ECR_REGISTRY }}:latest-backend
 
       - name: Build and Push Frontend Docker Image to ecr
         run: |
           echo "Building the Frontend Docker image"
-          docker build -t ${{ secrets.ECR_REGISTRY }}:latest-frontend -f ./frontend .
+          cd ./frontend
+          docker build -t ${{ secrets.ECR_REGISTRY }}:latest-frontend -f ./Dockerfile .
           echo "Pushing the Frontend Docker image to Amazon ECR"
           docker push ${{ secrets.ECR_REGISTRY }}:latest-frontend
