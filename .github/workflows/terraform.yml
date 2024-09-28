@@ -27,7 +27,7 @@ jobs:
 
      -  name: Terraform init
         run: |
-         cd ./infrastructure/main.tf
+         cd ./infrastructure
          terraform init
     
      -  name: Terraform format
