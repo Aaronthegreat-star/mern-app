@@ -32,6 +32,24 @@ jobs:
           echo "Pushing the Backend Docker image to Amazon ECR"
           docker push ${{ secrets.ECR_REGISTRY }}:latest-backend
 
+      - name: Introducing the new image ID in the Amazon ECS task definition 
+        id: backend-task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+           task-definition: ./backend/task-definition.json
+           container-name: mern-backend
+           image: ${{ steps.build-image.outputs.image }}
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+           task-definition: ${{ steps.task-def.outputs.task-definition }}
+           service: my-backend-service
+           cluster: my-ECSCluster
+           wait-for-service-stability: true
+
+      
+
       - name: Build and Push Frontend Docker Image to ecr
         run: |
           echo "Building the Frontend Docker image"
@@ -39,3 +57,23 @@ jobs:
           docker build -t ${{ secrets.ECR_REGISTRY }}:latest-frontend -f ./Dockerfile .
           echo "Pushing the Frontend Docker image to Amazon ECR"
           docker push ${{ secrets.ECR_REGISTRY }}:latest-frontend
+
+      - name: Introducing the new image ID for the frontend in the Amazon ECS task definition 
+        id: frontend-task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+           task-definition: ./frontend/task-definition.json
+           container-name: mern-frontend
+           image: ${{ steps.build-image.outputs.image }}
+          
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+           task-definition: ${{ steps.task-def.outputs.task-definition }}
+           service: my-frontend-service
+           cluster: my-ECSCluster
+           wait-for-service-stability: true
+
+      
+
+      

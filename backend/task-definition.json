@@ -2,7 +2,7 @@
     "containerDefinitions": [
         {
             "name": "mern-backend",
-            "image": "mayusb/mern-backend:lastest",
+            "image": "839399074955.dkr.ecr.us-east-1.amazonaws.com/my-ecr-repo:latest-backend",
             "cpu": 1024,
             "memory": 2048,
             "memoryReservation": 1024,
@@ -32,7 +32,7 @@
             "ulimits": []
         }
     ],
-    "family": "ecs-task-def",
+    "family": "my-backend-task",
     "executionRoleArn": "arn:aws:iam::839399074955:role/ECSTaskDefExecutionRole",
     "networkMode": "awsvpc",
     "volumes": [],

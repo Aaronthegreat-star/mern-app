@@ -1,0 +1,33 @@
+{
+    "containerDefinitions": [
+        {
+            
+             "name": "mern-frontend-backend",
+             "image": "839399074955.dkr.ecr.us-east-1.amazonaws.com/my-ecr-repo:latest-frontend",
+             "cpu": 1024,
+             "memory": 2048,
+             "memoryReservation":1024,
+             "portMappings": [
+                 {
+                        "name": "mern-frontend-3000-tcp",
+                        "containerPort": 3000,
+                        "hostPort": 3000,
+                        "protocol": "tcp",
+                        "appProtocol": "http",
+                 }
+            ],
+            "essential": true,
+            "environment": [  
+                 {
+                        "name": "API_URL",
+                        "value": "http://mern-backend-service:5000",
+                 },
+      ]
+            
+
+        }
+
+
+    ]
+
+}
