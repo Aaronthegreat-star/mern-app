@@ -36,7 +36,7 @@ resource "aws_ecs_task_definition" "my_backend_task" {
 resource "aws_ecs_service" "mern_backend_service" {
   name            = "my-backend-service"
   cluster         = aws_ecs_cluster.mern_ecs_cluster.arn
-  task_definition = aws_ecs_task_definition.my_ecs_task.arn
+  task_definition = aws_ecs_task_definition.my_backend_task.arn
   desired_count   = 1
   launch_type = "FARGATE"
 
@@ -68,7 +68,7 @@ resource "aws_ecs_task_definition" "my_frontend_task" {
   }
   container_definitions = jsonencode([
     {
-      "name"                   = "mern-frontend-backend"
+      "name"                   = "mern-frontend-container"
       "image"                  = "839399074955.dkr.ecr.us-east-1.amazonaws.com/my-ecr-repo:latest-frontend"
       "cpu"                    = 1024
       "memory"                 = 2048
