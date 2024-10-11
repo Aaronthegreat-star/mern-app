@@ -54,7 +54,7 @@ jobs:
         if: github.event_name == 'push'
         run: |
          cd ./infrastructure
-         terraform plan -out=plan.tfplan
+         
          terraform apply -auto-approve plan.tfplan
         continue-on-error: true  #continues the workflow even if an error is thrown up
         env:
