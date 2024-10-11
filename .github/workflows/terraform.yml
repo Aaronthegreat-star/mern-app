@@ -55,7 +55,7 @@ jobs:
         run: |
          cd ./infrastructure
          
-         terraform apply -auto-approve plan.tfplan
+         terraform apply -auto-approve 
         continue-on-error: true  #continues the workflow even if an error is thrown up
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
